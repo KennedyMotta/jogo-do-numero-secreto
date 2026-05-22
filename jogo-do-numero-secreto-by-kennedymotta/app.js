@@ -1,6 +1,10 @@
 //Variáveis, básicas.
 let tries = 0;
 let maxNumber = 1000;
+const dica = document.querySelector('.texto__paragrafo'); 
+const inputField = document.querySelector('.container__input');
+const reiniciarBtn = document.getElementById("reiniciar");
+
 
 //Mostrar Mensagens Base.
 showInitialMessage();
@@ -8,11 +12,11 @@ randomSecretNumber(maxNumber);
 
 //Resetar o Jogo.
 function resetGame(){
-    tries = 0;
     randomSecretNumber(maxNumber);
     showInitialMessage();
     cleanField();
-    document.getElementById("reiniciar").setAttribute("disabled",true);
+    dica.classList.remove("acertou", "erro");
+   reiniciarBtn.setAttribute("disabled", true);
 }
 
 //Exibir Mensagem Inicial
@@ -46,23 +50,38 @@ function randomSecretNumber(maxNumber){
 //Verifica a jogada para saber se o Player ganhou ou não.
 function verifyTentative(){
     tries++;
+
     if(input() == secretNumber){
         const text3 = "Acertou!";
-        const text4 = "Você descobriu o Número Secreto com ";
+        const text4 = "Você descobriu o Número Secreto com: ";
         changeText("h1", text3);
         responsiveVoice.speak(text3, "Brazilian Portuguese Female", { rate: 1.3 });
-        let triesMessage = tries > 1 ? " tentativas! " : " tentativa. "
+        let triesMessage = tries > 1 ? " tentativas!" : " tentativa.";
         changeText("p", text4 + tries + triesMessage);
         responsiveVoice.speak(text4 + tries + triesMessage, "Brazilian Portuguese Female", { rate: 1.3 });
-        document.getElementById("reiniciar").removeAttribute("disabled");
-    } else{
-        textToHelp = secretNumber > input() ? "O Número Secreto é Maior!" : "O Número Secreto é Menor!"; 
+        dica.classList.remove("erro");
+         dica.classList.add("acertou");
+
+    } else {
+        const textToHelp = secretNumber > input() ? "O Número Secreto é Maior!" : "O Número Secreto é Menor!"; 
         responsiveVoice.speak(textToHelp, "Brazilian Portuguese Female", { rate: 1.3 });
-        changeText("p",textToHelp);
+        changeText("p", textToHelp);
         cleanField();
-}}
+        
+   
+         dica.classList.add("erro");
+    }
+        reiniciarBtn.removeAttribute("disabled");
+}
 
 function cleanField(){
     inputMessage = document.querySelector('Input');
     inputMessage.value = "";
 }
+
+
+inputField.addEventListener('keydown', function(event) {
+    if(event.key === 'Enter') {  
+        verifyTentative();       
+    }
+});
