@@ -1,0 +1,271 @@
+:root {
+    --fade1: #0093b4;
+    --fade2: #03cbf6;
+    --bg-primary: linear-gradient(to bottom, #233e49, #0093b4);
+    --text-primary: #ffffff;
+    --text-accent: #03cbf6;
+    --text-success: #00ff9d;
+    --text-error: #ff5252;
+    --button-gradient: linear-gradient(135deg, var(--fade1), var(--fade2));
+    --button-hover: linear-gradient(135deg, var(--fade2), var(--fade1));
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgb(2, 77, 94)), url("img/code.png"); /* branco para azul */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+        min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;   
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("img/code.png") no-repeat right;
+    background-size: contain;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container {
+    position: relative;
+    width: 80%;
+    max-width: 1200px;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6.5rem;
+    box-shadow: 0 0.8rem 2rem rgba(0,0,0,0.35);
+    background-image: linear-gradient(to bottom, #163131, #0093b4);
+    padding: 3rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 1;}
+
+
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("img/Ruido.png") repeat;
+    opacity: 0.45;
+    pointer-events: none;
+    border-radius: 8rem;
+    z-index: 0;
+}
+
+
+.container > * {
+    position: relative;
+    z-index: 1;
+}
+
+.container:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 1.2rem 2.5rem rgba(0, 0, 0, 0.45);
+}
+
+.container__conteudo {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.container__informacoes {
+    flex: 1 1 500px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+
+.container__texto h1 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 4rem;             
+    line-height: 1.2;
+    background: linear-gradient(to top, #c6f2fc, #ffffff); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0.3rem 0.6rem rgba(0,0,0,0.45); 
+    margin-bottom: 1rem;
+    transition: background 0.3s ease;
+}
+
+.container__texto p.texto__paragrafo {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-accent);
+    text-align: left;
+    margin-bottom: 1rem;
+    text-shadow: 0 0.2rem 0.5rem rgba(0,0,0,0.25);
+    transition: color 0.3s ease;
+}
+
+.container__texto p.texto__paragrafo.acertou {
+    color: var(--text-success);
+    text-shadow: 0 0.1rem 0.32rem rgba(0, 255, 157, 0.534);
+}
+
+.container__texto p.texto__paragrafo.erro {
+    color: var(--text-error);
+    text-shadow: 0 0.1rem 0.32rem rgba(255, 82, 82, 0.774);
+}
+
+.container__input {
+    width: 100%;
+    height: 60px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    color: #012027;
+    border: none;
+    padding: 1rem 1.5rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    box-shadow: inset 0 0.2rem 0.5rem rgba(0,0,0,0.15);
+}
+
+.container__botoes {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 1rem;
+}
+
+.container__botao {
+    flex: 1 1 140px;
+    max-width: 200px;
+    border-radius: 16px;
+    padding: 14px 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    background: var(--button-gradient);
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+}
+
+.container__botao:disabled,
+.container__botao_disabled {
+    flex: 1 1 140px;
+    max-width: 200px;
+    border-radius: 16px;
+    padding: 14px 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5); /* texto mais apagado */
+    background: linear-gradient(135deg, rgba(0,147,180,0.4), rgba(3,203,246,0.4)); /* gradiente mais suave */
+    border: none;
+    cursor: not-allowed; /* deixa claro que não é clicável */
+    text-align: center;
+    box-shadow: 0 0.4rem 0.8rem rgba(0,0,0,0.15); /* sombra mais leve */
+    transition: none; /* sem hover ou animação */
+}
+
+.container__botao:disabled:hover,
+.container__botao_disabled:hover {
+    transform: none;
+    box-shadow: 0 0.4rem 0.8rem rgba(0,0,0,0.15); 
+    background: linear-gradient(135deg, rgba(0,147,180,0.4), rgba(3,203,246,0.4));
+}
+
+.container__botao:hover {
+    transform: translateY(-0.2rem);
+    box-shadow: 0 0.8rem 1rem rgba(0,0,0,0.35);
+    background: var(--button-hover);
+}
+
+.container__img {
+    transform: translateY(-10%);
+    flex: 0 0 300px;      
+    max-width: 25%;         
+    height: auto;         
+    object-fit: contain;    
+    transition: transform 0.3s ease;
+}
+
+@media screen and (max-width: 1024px) {
+    .container__conteudo {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem; /* espaço entre img e texto */
+    }
+
+    .container__img {
+        max-width: 100%;
+        margin-top: -8rem; /* remove negativo que quebrava */
+        max-height: 16vh; /* limita altura para não estourar a tela */
+    }
+
+    .container__texto h1 {
+        font-size: clamp(2rem, 5vw, 3rem);
+        text-align: center;
+    }
+
+    .container__texto p.texto__paragrafo {
+        font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+        text-align: center;
+        margin: 0.5rem 0;
+        transition: color 0.3s ease, font-size 0.3s ease;
+    }
+
+    .container__botoes {
+        justify-content: center;
+        gap: 1rem;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .container__img {
+        max-width: 40%;
+        max-height: 15vh;
+        margin-top:-5rem;
+    }
+
+    .container__texto h1 {
+        font-size: clamp(1.6rem, 5vw, 2.4rem);
+        line-height: 1.3;
+    }
+
+    .container__texto p.texto__paragrafo {
+        font-size: clamp(1rem, 3vw, 1.4rem);
+    }
+
+    .container__botao {
+        font-size: 1.4rem;
+        padding: 10px 0;
+        flex: 1 1 120px;
+        max-width: 180px;
+    }
+}
+
